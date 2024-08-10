@@ -1,29 +1,33 @@
 # Cucumber Automation Testing Framework
-# Overview
-This repository contains a framework designed to test two main features:
 
-# 1. searchProduct
-# 2. Checkout
-The framework utilizes Cucumber for Behavior-Driven Development (BDD), TestNG for test execution, and Page Object Model (POM) for organizing code.
+## Overview
+This repository contains a comprehensive automation framework built to test two primary features of an e-commerce application:
 
-# Features
-# 1. searchProduct
-Objective: Validate if the products searched on the homepage are available in the offers page.
-Steps:
+1. **Search Product** - Validates if products searched on the homepage are available on the offers page.
+2. **Checkout** - Verifies the checkout process including adding items to the cart, validating the checkout page, and applying promo codes.
+
+The framework leverages Cucumber for Behavior-Driven Development (BDD), TestNG for test execution, and the Page Object Model (POM) for code organization.
+
+## Features
+
+### 1. Search Product
+**Objective:** Validate if products searched on the homepage appear in the offers page.
+
+**Steps:**
 1. Land on the homepage.
-2. Search for products using short names (e.g., tom for tomato, beet for beetroot).
+2. Search for products using short names (e.g., `tom` for `tomato`, `beet` for `beetroot`).
 3. Navigate to the offers page (opened as a child window).
 4. Check if the searched products are available in the top deals on the offers page.
 5. Validate if products found on both pages match.
 
-Example:
+**Example:**
+- Searching for `tom` should return `true` if found on both pages, indicating a test pass.
+- Searching for `beet` should return `false` if not found on the offers page, indicating a test failure.
 
-tom should return as true if found in both pages hence Test passed
-beet should return as false if not found in the offers page hence Test failed. 
+### 2. Checkout
+**Objective:** Verify the checkout process including adding items to the cart, validating details on the checkout page, and applying a promo code.
 
-# 2. Checkout
-Objective: Verify the checkout process including the addition of items to the cart, validation on the checkout page, and the ability to enter a promo code.
-Steps:
+**Steps:**
 1. Land on the homepage.
 2. Search for a product using short names.
 3. Add 3 units of the found product to the cart.
@@ -31,27 +35,27 @@ Steps:
 5. Validate that the product details match those on the homepage.
 6. Verify the functionality of entering a promo code and placing the order.
 
-# Project Structure
+## Project Structure
 
-1. pageobject:
-Contains page factory classes for LandingPage, CheckoutPage, OffersPage, and PageObjectManager.
-2. utils:
-TextContextSetup: for sharing objects and managing driver initialization.
-BaseTest: Manages global properties and browser initiation. Configurable via Maven terminal commands.
-GenericUtils: Contains resusable code like switching to child window.
-3. stepdefinitions:
-Includes step definition files for searchProduct and checkout features which will be divided into 3 step definition file such as - LandingPage, CheckoutPage, OffersPage.
-Contains hooks for test lifecycle management (e.g., quitting the driver, setting screenshot paths for failed tests).
-4. CucumberOptions::
-TestRunner for configuring TestNG and running Cucumber tests.
-1. TestNGTestRunner 
-Configures TestNG runner with feature file paths, tags, and plugins.
-Generates Extent, HTML and JSON reports.
-Uses Extent adapter and extends parent class AbstractTestNGCucumberTests to run using TestNG
-Utilizes DataProvider for handling multiple datasets.
-3. FailedTestRunner
-Produces a failedScenario.txt to identify failed tests.
-5. Resources
-Here global property and extent property and necessary browser drivers will be stored.
-1. Global Property - Contains browser name and QAURL
-2. Extent Property - To generate extent report
+1. **`pageobject`:**
+   - Contains page factory classes for `LandingPage`, `CheckoutPage`, `OffersPage`, and `PageObjectManager`.
+
+2. **`utils`:**
+   - `TextContextSetup`: Manages shared objects and driver initialization.
+   - `BaseTest`: Manages global properties and browser initiation. Configurable via Maven terminal commands.
+   - `GenericUtils`: Contains reusable code, such as switching to child windows.
+
+3. **`stepdefinitions`:**
+   - Includes step definition files for `searchProduct` and `checkout` features, divided into:
+     - `LandingPage`
+     - `CheckoutPage`
+     - `OffersPage`
+   - Contains hooks for test lifecycle management (e.g., quitting the driver, setting screenshot paths for failed tests).
+
+4. **`CucumberOptions`:**
+   - **`TestRunner`**: Configures TestNG to run Cucumber tests with feature file paths, tags, and plugins. Generates Extent, HTML, and JSON reports. Uses Extent adapter and extends `AbstractTestNGCucumberTests` for TestNG integration. Utilizes DataProvider for handling multiple datasets.
+   - **`FailedTestRunner`**: Produces `failedScenario.txt` to identify failed tests.
+
+5. **`Resources`:**
+   - **Global Property**: Stores browser name and QA URL.
+   - **Extent Property**: Configures extent reporting.
